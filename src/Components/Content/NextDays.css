@@ -1,0 +1,26 @@
+.nextday{
+    margin-top: 20px;
+    width: 399px;
+    border-radius: 12px;
+    background-color: #13131A;
+    height: 210px;
+    align-items: center;
+}
+.nextday-container{
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    width:  355px;
+    height: 152px;
+    top: 12px;
+    left: 12px;
+}
+.nextday-day{
+    width: 67px;
+    height: 152px;
+    margin-right: 4px;
+}
+.nextday-img{
+    width: 56px;
+    height: 56px;
+}

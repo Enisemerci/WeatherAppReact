@@ -1,0 +1,74 @@
+.card {
+  width: 335px;
+  height: 304px;
+  border-radius: 8px;
+  position: relative;
+}
+.weather-bg-clear {
+  background-image: url("../../Assets/Images/clearday.png");
+}
+.weather-bg-clouds {
+  background-image: url("../../Assets/Images/fewcloudsday.png");
+}
+.weather-bg-rain {
+  background-image: url("../../Assets/Images/rainday.png");
+}
+.weather-bg-haze{
+  background-image: url("../../Assets/Images/cloudyday.png");
+}
+.weather-bg-snow{
+  background-image: url("../../Assets/Images/stormday.png");
+}
+.weather-bg-n-clear {
+  background-image: url("../../Assets/Images/clearnight.png");
+}
+.weather-bg-n-clouds {
+  background-image: url("../../Assets/Images/fewcloudsnight.png");
+}
+.weather-bg-n-rain {
+  background-image: url("../../Assets/Images/rainnight.png");
+}
+.weather-bg-n-haze{
+  background-image: url("../../Assets/Images/cloudynight.png");
+}
+.weather-bg-n-snow{
+  background-image: url("../../Assets/Images/stormnight.png");
+}
+p {
+  color: white;
+}
+.card-place {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 30px;
+}
+.card-date {
+  position: absolute;
+  margin-top: 20px;
+  left: 0;
+  color: white;
+  margin-left: 30px;
+}
+.card-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  width: 200px;
+  height: 200px;
+}
+.card-degree{
+    position: absolute;
+    left: 30px;
+    bottom: 50px;
+}
+.card-lmdegree{
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+}
+.card-desc{
+    position: absolute;
+    left: 30px;
+    bottom: 10px;
+}

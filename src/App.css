@@ -1,0 +1,69 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.welcomePage {
+  background-color: #13131a;
+  height: 812px;
+}
+.app {
+  padding: 20px;
+  background-color: #13131a;
+  border-radius: 12px;
+}
+.weatherforecast{
+  margin-left: 20px;
+  background-color: transparent;
+}
+.appsearch {
+  display: flex; 
+  align-items: center;
+}
+.welcomePage-desc {
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.welcomePage-img {
+  position: relative;
+  z-index: 1;
+}
+.welcomePage-input {
+  width: 311px;
+  height: 56px;
+  background-color: #1e1e29;
+  border: none;
+  border-radius: 8px;
+  padding: 0 20px 0 20px;
+  margin-bottom: 100px;
+}
+.location-button{
+  background-color: #1e1e29;
+  height: 50px;
+  margin-bottom: 50px;
+}
+.location-button:hover {
+  background-color: rgb(38, 38, 118); 
+  color: white; 
+}
+.card {
+  padding: 2em;
+}
+.read-the-docs {
+  color: #888;
+}
+@media only screen and (max-width: 880px) {
+  .appsearch {
+    flex-direction: column; 
+  }
+
+  .welcomePage,
+  .weatherForecast {
+    
+    width: 100%; 
+  }
+}
+
