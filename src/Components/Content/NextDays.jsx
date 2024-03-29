@@ -21,60 +21,30 @@ const NextDays = ({ weatherData }) => {
   const kelvinToCelsius = (temp) => {
     return Math.round(temp - 273.15);
   };
-  let iconImagePath;
-  if (weatherData && weatherData.list[0].weather[0].main) {
-    const weatherMain = weatherData.list[0].weather[0].main.toLowerCase();
-    const date = new Date(weatherData.list[0].dt_txt);
-    const hour = date.getHours();
 
+  const getWeatherIcon = (weatherMain, hour) => {
+    let iconImagePath;
     switch (weatherMain) {
-      case "clear":
-        iconImagePath = clearDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = clearNight;
-          break;
-        }
+      case "Clear":
+        iconImagePath = hour >= 20 || hour < 6 ? clearNight : clearDay;
         break;
-      case "clouds":
-        iconImagePath = fewcloudDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = fewcloudNight;
-          break;
-        }
+      case "Clouds":
+        iconImagePath = hour >= 20 || hour < 6 ? fewcloudNight : fewcloudDay;
         break;
-      case "rain":
-        iconImagePath = rainDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = rainNight;
-          break;
-        }
+      case "Rain":
+        iconImagePath = hour >= 20 || hour < 6 ? rainNight : rainDay;
         break;
-      case "haze":
-        iconImagePath = cloudyDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = cloudyNight;
-          break;
-        }
+      case "Haze":
+        iconImagePath = hour >= 20 || hour < 6 ? cloudyNight : cloudyDay;
         break;
-      case "snow":
-        iconImagePath = stormDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = stormNight;
-          break;
-        }
+      case "Snow":
+        iconImagePath = hour >= 20 || hour < 6 ? stormNight : stormDay;
         break;
-      case "broken clouds":
-        iconImagePath = clearDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = clearNight;
-          break;
-        }
-        break;
-
       default:
-        iconImagePath = fewcloudDay; // Varsayılan ikon
+        iconImagePath = fewcloudDay; 
     }
-  }
+    return iconImagePath;
+  };
 
   return (
     <div className="nextday">
@@ -82,16 +52,18 @@ const NextDays = ({ weatherData }) => {
         {weatherData &&
           weatherData.list &&
           weatherData.list.length > 0 &&
-          weatherData.list.slice(0, 5).map((item, index) => (
-            <div className="nextday-day" key={index}>
-              <p>{getDateInfo(item.dt)}</p>
-              <img className="nextday-img" src={iconImagePath} alt="" />
-
-              <p>{kelvinToCelsius(item.main.temp_min)}°C</p>
-
-              <p>{kelvinToCelsius(item.main.temp_max)}°C</p>
-            </div>
-          ))}
+          weatherData.list.slice(0, 5).map((item, index) => {
+            const date = new Date(item.dt_txt);
+            const hour = date.getHours();
+            return (
+              <div className="nextday-day" key={index}>
+                <p>{getDateInfo(item.dt)}</p>
+                <img className="nextday-img" src={getWeatherIcon(item.weather[0].main, hour)} alt="" />
+                <p>{kelvinToCelsius(item.main.temp_min)}°C</p>
+                <p>{kelvinToCelsius(item.main.temp_max)}°C</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

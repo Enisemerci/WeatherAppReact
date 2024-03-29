@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Card.css";
+
+// İkonları import et
 import clearDay from "../../Assets/Icons/ClearDay.png";
 import clearNight from "../../Assets/Icons/ClearNight.png";
 import cloudyDay from "../../Assets/Icons/CloudyDay.png";
@@ -13,75 +15,45 @@ import stormNight from "../../Assets/Icons/StormNight.png";
 
 const Card = ({ weatherData }) => {
   const [backgroundClass, setBackgroundClass] = useState("");
+  const [iconImagePath, setIconImagePath] = useState("");
 
   useEffect(() => {
     if (weatherData && weatherData.list[0].weather[0].main) {
       const weatherMain = weatherData.list[0].weather[0].main.toLowerCase();
       const date = new Date(weatherData.list[0].dt_txt);
       const hour = date.getHours();
-      if (hour >= 20 || hour < 6) {
-        setBackgroundClass(`weather-bg-n-${weatherMain}`);
-        return;
-      }
-      setBackgroundClass(`weather-bg-${weatherMain}`);
+      setBackgroundClass(getBackgroundClass(weatherMain, hour));
+      setIconImagePath(getIconImagePath(weatherMain, hour));
     }
   }, [weatherData]);
 
-  let iconImagePath;
+  // Saate göre arka plan rengini belirle
+  const getBackgroundClass = (weatherMain, hour) => {
+    if (hour >= 20 || hour < 6) {
+      return `weather-bg-n-${weatherMain}`;
+    }
+    return `weather-bg-${weatherMain}`;
+  };
 
-  if (weatherData && weatherData.list[0].weather[0].main) {
-    const weatherMain = weatherData.list[0].weather[0].main.toLowerCase();
-    const date = new Date(weatherData.list[0].dt_txt);
-    const hour = date.getHours();
-
+  // Saate ve hava durumuna göre ikon yolu belirle
+  const getIconImagePath = (weatherMain, hour) => {
     switch (weatherMain) {
       case "clear":
-        iconImagePath = clearDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = clearNight;
-          break;
-        }
-        break;
+        return hour >= 20 || hour < 6 ? clearNight : clearDay;
       case "clouds":
-        iconImagePath = fewcloudDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = fewcloudNight;
-          break;
-        }
-        break;
+        return hour >= 20 || hour < 6 ? cloudyNight : fewcloudDay;
       case "rain":
-        iconImagePath = rainDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = rainNight;
-          break;
-        }
-        break;
+        return hour >= 20 || hour < 6 ? rainNight : rainDay;
       case "haze":
-        iconImagePath = cloudyDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = cloudyNight;
-          break;
-        }
-        break;
+        return hour >= 20 || hour < 6 ? cloudyNight : cloudyDay;
       case "snow":
-        iconImagePath = stormDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = stormNight;
-          break;
-        }
-        break;
+        return hour >= 20 || hour < 6 ? stormNight : stormDay;
       case "broken clouds":
-        iconImagePath = clearDay;
-        if (hour >= 20 || hour < 6) {
-          iconImagePath = clearNight;
-          break;
-        }
-        break;
-
+        return hour >= 20 || hour < 6 ? clearNight : clearDay;
       default:
-        iconImagePath = fewcloudDay; // Varsayılan ikon
+        return fewcloudDay; // Varsayılan ikon
     }
-  }
+  };
 
   return (
     <div className={`card ${backgroundClass}`}>
